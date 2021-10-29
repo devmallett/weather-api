@@ -20,10 +20,19 @@ class WeatherCaller():
         
         data = json.loads(response.text)
         print(data['current']['wind_degree'])
+    
+    def get_coordinates(self):
 
-        # for i in dumped_data:
-        #     print(dumped_data[0])
+        api_call = f'{BASE_URL}?key={WEATHER_API_KEY}&q={self.city_name}&aqi=no'
+        response = requests.get(api_call)
+
+        data = json.loads(response.text)
+        coordinates = ( data['location']['lat'] ,data['location']['lon'] )
+        print(coordinates)
+
+
 
 london_caller = WeatherCaller('London')
 
 london_caller.get_wind_degree()
+london_caller.get_coordinates()
